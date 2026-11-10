@@ -159,3 +159,8 @@ new_id에 나타날 수 있는 특수문자는 <code>-_.~!@#$%^&amp;*()=+[{]}:?,
 
 
 > 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges
+
+
+개념 : 문자열에서 반복되는 문자를 하나로 어떻게 만들 것인지, 특정 문자에만 적용할 때 어떻게 할 것인지
+
+str.push_back(), erase(idx, len), front(), back()
