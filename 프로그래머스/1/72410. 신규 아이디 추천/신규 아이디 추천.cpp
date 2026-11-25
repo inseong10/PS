@@ -5,44 +5,52 @@
 using namespace std;
 
 string solution(string new_id) {
-    string str = new_id;
+    string answer = "";
+    string hw = "hello world";
     
-    for(int i=0; i<new_id.size(); ++i){      
-        str[i] = tolower(new_id[i]);
+    //1단계
+    for(int i=0; i<new_id.size(); ++i){
+        new_id[i] = tolower(new_id[i]);
     }
-    
-    string str2;
-    for(auto s : str){
-        if((s >= '0' && s <= '9') || (s >= 'a' && s <= 'z') || s == '-' || s == '_' || s == '.')
-            str2.push_back(s);
-    }
-    
-    string str3;
-    for(auto s : str2){
-        if(s != '.' || str3.empty() || str3.back() != '.'){
-            str3.push_back(s);
-        }
-    }
-    
-    if(!str.empty() && str3.front() == '.')   str3.erase(0, 1);
-    if(!str.empty() && str3.back() == '.')  str3.erase(str3.size()-1, 1);
-    
-    if(str3.empty()) str3 = "a";
-    
-    if(str3.size() >= 16){
-        str3.erase(15, str3.size()-15);
-        if(str3.back() == '.')  str3.erase(str3.size()-1, 1);
-    }
-    
-    if(str3.size() <= 2){
-        while(str3.size() != 3){
-            str3.push_back(str3.back());
-        }
-    }
-    
-    cout << str3;
 
     
-    string answer = str3;
-    return answer;
+    //2단계
+    string new_id2;
+    for(int i=0; i<new_id.size(); ++i){
+        if((new_id[i] <= 'z' && new_id[i] >= 'a') || (new_id[i] >= '0' && new_id[i] <= '9') ||
+          new_id[i] == '-' || new_id[i] == '_' || new_id[i] == '.')
+            new_id2 += new_id[i];
+    }
+    
+    //3단계
+    string new_id3;
+    for(int i=0; i<new_id2.size(); ++i){
+        if(new_id2[i]!='.' || new_id3.empty() || new_id3.back()!='.')
+            new_id3.push_back(new_id2[i]);
+    }
+    
+    //4단계
+    if(new_id3[0] == '.')   new_id3.erase(0,1);
+    if(new_id3[new_id3.size()-1] == '.') new_id3.erase(new_id3.size()-1, 1);
+    
+    cout << new_id3 << endl; 
+    //5단계
+    if(new_id3.empty()) new_id3 = "a";
+    
+    //6단계
+    if(new_id3.size() >= 16)    new_id3 = new_id3.substr(0,15);
+
+    if(new_id3[new_id3.size()-1] == '.') new_id3.erase(new_id3.size()-1, 1);
+    
+    //7단계
+    if(new_id3.size() <= 2){
+        while(new_id3.size() != 3){
+            new_id3 += new_id3.back();
+        }
+    }
+
+    
+    cout << new_id3;
+    
+    return new_id3;
 }
