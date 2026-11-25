@@ -29,12 +29,12 @@ int getVal(const string& s){
 int solution(vector<int> picks, vector<string> minerals) {
     int answer = 0;
     int limit = min(picks[0]+picks[1]+picks[2], int((minerals.size()+4)/5));
+    int n = minerals.size();
     
     vector<pair<int, int>> group;
     for(int i=0; i<limit; i++){
         int val = 0;
-        for(int j=i*5; j<i*5+5; ++j){
-            if(j >= minerals.size())    break;
+        for(int j=i*5; j<min(i*5+5, n); ++j){
             val += getVal(minerals[j]);
         }
         group.push_back({val, i});
@@ -49,8 +49,7 @@ int solution(vector<int> picks, vector<string> minerals) {
         int idx = p.second;
         int curPick = choose;
 
-        for(int i=idx*5; i<idx*5+5; ++i){
-            if(i >= minerals.size())    break;
+        for(int i=idx*5; i<min(idx*5+5, n); ++i){
             answer += getWeight(curPick, minerals[i]);
         }
         picks[choose]--;
