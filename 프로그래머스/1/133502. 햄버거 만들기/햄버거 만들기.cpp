@@ -1,30 +1,28 @@
+#include <string>
 #include <vector>
+#include <iostream>
+
 using namespace std;
 
 int solution(vector<int> ingredient) {
-    vector<int> st;
-    st.reserve(ingredient.size());
-
     int answer = 0;
-
-    for (int value : ingredient) {
-        st.push_back(value);
-
-        int n = st.size();
-
-        if (n >= 4 &&
-            st[n - 4] == 1 &&
-            st[n - 3] == 2 &&
-            st[n - 2] == 3 &&
-            st[n - 1] == 1) {
-
-            for (int i = 0; i < 4; ++i) {
-                st.pop_back();
+    vector<int> burger;
+    
+    int cnt = 0;
+    for(auto v : ingredient){
+        burger.push_back(v);
+        cnt++;
+        
+        if(cnt >= 4){
+            if(burger[cnt-1] == 1 && burger[cnt-2] == 3 && burger[cnt-3] == 2 && burger[cnt-4] == 1){
+                answer++;
+                cnt -= 4;
+                for(int i=0; i<4; ++i){
+                    burger.pop_back();
+                }
             }
-
-            ++answer;
         }
     }
-
+    
     return answer;
 }
